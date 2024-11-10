@@ -1,0 +1,43 @@
+import java.util.Scanner;
+public class TakeHome2 {
+
+    public static void main(String[] args) {
+ 
+        Scanner type = new Scanner(System.in);
+ 
+                System.out.println("Enter your grade in STS: ");
+                double g1 = type.nextDouble();
+ 
+                System.out.println("Enter your grade in UTS: ");
+                double g2 = type.nextDouble();
+ 
+                System.out.println("Enter your grade in Java: ");
+                double g3 = type.nextDouble();
+ 
+ 
+                if (g1 >= 60 &&  g1 <=100) {
+                    System.out.println("STS Status: Passed");
+                } else if (g1 >= 0 && g1 < 60){
+                    System.out.println("STS Status: Failed");
+                } else {
+                    System.out.println("Invalid");
+                }
+                
+                if (g2 >= 60 &&  g2 <=100){
+                    System.out.println("UTS Status: Passed");
+                } else if (g1 >= 0 && g1 < 60) {
+                    System.out.println("UTS Status: Failed");
+                } else {
+                    System.out.println("Invalid");
+                }
+                
+                if (g3 >= 60 &&  g3 <=100) {
+                    System.out.println("Java Status: Passed");
+                } else if (g1 >= 0 && g1 < 60) {
+                    System.out.println("Java Status: Failed");
+                } else {
+                    System.out.println("Invalid");
+                }
+    }
+ 
+}
