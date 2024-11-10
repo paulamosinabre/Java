@@ -1,0 +1,222 @@
+// you can try these two examples to display ascending even numbers from 2 - 100
+// EXAMPLE 1
+class HelloWorld {
+    public static void main(String[] args) {
+        for (int i = 2; i <= 100; i += 2) {
+                System.out.println(i);
+        }
+    }
+}
+
+// EXAMPLE 2
+class HelloWorld {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0)
+                System.out.println(i);
+        }
+    }
+}
+
+// DISPLAY A NUMBER FROM 1 - 50 IN DESCENDING ORDER
+class HelloWorld {
+    public static void main(String[] args) {
+        for (int i = 50; i = 1; i--) {
+                System.out.println(i);
+        }
+    }
+}
+
+// EXAMPLE 3 CREATE A DIVISION TABLE
+class HelloWorld {
+    public static void main(String[] args) {
+        
+       int num = 8;
+       
+       for (double i = 1; i <= 10; i++) {
+           System.out.println(num + " / " + i + " = " + (num / i));
+       }
+    }
+}
+
+// EXAMPLE 4 PRINT A PHRASE AFTER A LOOP
+class HelloWorld {
+    public static void main(String[] args) {
+        
+       int i = 1;
+       while (i <= 100) {
+                System.out.println(i);
+           i++;
+       }
+       
+    System.out.println("done");
+    
+    }
+}
+
+// EXAMPLE 5. PRINT A SQUARE ACCORDING TO USER
+
+import java.util.Scanner;
+public class Looping_prac {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("Enter # of rows: ");
+        int rows = scan.nextInt();
+        
+        System.out.println("Enter # of columns: ");
+        int columns = scan.nextInt();
+        
+        System.out.println("Enter a symbol: ");
+        String symbol = scan.next();
+        
+        for(int i=1; i<=rows; i++){
+            System.out.println();
+            for (int j = 1; j <= columns; j++) {
+                System.out.print(symbol);
+            }
+        }
+    }
+}
+
+
+// EXAMPLE 6. MULTIPLICATION TABLE OF 7
+public class Looping_prac {
+
+    public static void main(String[] args) {
+        
+        int num = 7;
+        for(int i=1; i<=10; i++){
+            System.out.println(num + " * " + i + " = " + (num * i));
+        }
+        
+    }
+}
+
+// EXAMPLE 7
+public class Looping_prac {
+
+    public static void main(String[] args) {
+        
+        for (int i =1; i<=6; i++){
+            for (int j=1; j<=i; j++) 
+                System.out.print("*");
+            
+            System.out.println();
+        }
+    }
+}
+
+// Print a square
+
+import java.util.Scanner;
+public class Looping_prac {
+
+    public static void main(String[] args) {
+        for(int i=0; i<4; i++){ 
+            for(int j=0; j<4;j++){
+                System.out.print("*");
+            }
+        System.out.println("");
+        }
+    }
+}
+
+// print a triangle
+import java.util.Scanner;
+public class Looping_prac {
+
+    public static void main(String[] args) {
+        for(int i=0; i<4; i++){ 
+            for(int j=0; j<=i;j++){
+                System.out.print("*");
+            }
+        System.out.println("");
+        }
+    }
+}
+
+// print
+****
+***
+**
+*
+
+import java.util.Scanner;
+public class Looping_prac {
+
+    public static void main(String[] args) {
+        for(int i=0; i<=4; i++){ 
+            for(int j=4; j>i;j--){
+                System.out.print("*");
+            }
+        System.out.println("");
+        }
+    }
+}
+
+// print
+     *
+    **
+   ***
+  ****
+ *****
+class HelloWorld {
+    public static void main(String[] args) {
+     for(int i=0; i<5; i++){
+         for(int j=i; j<5; j++){
+             System.out.print(" ");
+         }
+         for(int j=0; j<=i; j++){
+             System.out.print("*");
+         }
+         System.out.println("" );
+     }
+    }
+}
+
+// print
+*****
+ ****
+  ***
+   **
+    *
+import java.util.Scanner;
+public class Looping_prac {
+
+    public static void main(String[] args) {
+       for(int i=0; i<5; i++){
+           //for(int j=i; j<5; j++){
+           for(int j=0; j<=i; j++){
+               System.out.print(" ");
+           }
+           //for(int j=0; j<=i; j++){
+           for(int j=i; j<=4; j++){
+               System.out.print("*");
+           }
+
+// LAB
+import java.util.Scanner;
+public class LoopingLesson {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("How many times? ");
+        int num = scan.nextInt();
+        
+        for(int count = 0; count<=num;count++){
+            System.out.print(count * - 4 + 21 + " ");
+        }
+    }
+    
+}
+           System.out.println(" ");
+       }
+    }
+}
+

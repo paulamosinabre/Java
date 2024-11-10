@@ -1,0 +1,155 @@
+// ARRAY LIST
+import java.util.ArrayList;
+import java.util.Scanner;
+public class COM241_ARRAYLIST {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
+        
+        list.add("Ana");
+        list.add("Jose");
+        list.add("Juan");
+        System.out.println("ArrayList after add" + list);
+        
+        //add list
+        System.out.println("Enter a name to add: ");
+        String userList = scan.nextLine();
+        
+        
+        list.add(userList);
+        System.out.println("ArrayList after add: " + list);
+        
+        //remove we need an index
+        
+        System.out.println("\nRemove an element: ");
+        int removeIndex = scan.nextInt();
+        
+        list.remove(removeIndex);
+        
+        System.out.println("Removed: " + list);
+        
+        // replace an element
+        
+        System.out.println("\nEnter an index to replace: ");
+        int replaceIndex = scan.nextInt();
+        scan.nextLine();
+        
+        System.out.println("Enter a name to replace: ");
+        String replaceName = scan.nextLine();
+        
+        list.set(replaceIndex, replaceName);
+        
+        System.out.println("Replaced: " + list);
+        
+        // contains
+        System.out.println("\nSearch if included: ");
+        String search = scan.nextLine();
+        
+        System.out.println("Contains " + search + "? " + list.contains(search));
+        
+        // what index
+        /*
+        System.out.println("\nIdentify the index of: ");
+        String nameIndex = scan.nextLine();
+        */
+        System.out.println("Index of: " + list.indexOf(search));
+        
+        //get
+        System.out.println("\nEnter an index to GET the element: ");
+        int elementIndex = scan.nextInt();
+        
+        System.out.println("ELEMENT at index " + elementIndex + ": " + list.get(elementIndex));
+        
+        //clear
+        list.clear();
+        
+        //size
+        System.out.println("\nSize of the list: " + list.size());
+        
+        //System.out.println("Do you wish to clear: ");
+        
+        /*
+        while(true){
+            System.out.println("Enter a name: ");
+            String userList = scan.nextLine();
+            if (userList.equals(" ")){
+                break;
+            }
+            list.add(userList);
+        }
+        
+        for(int i = 0; i < list.size(); i++){
+            System.out.println(list.get(i));
+        }
+*/
+    }
+}
+
+
+//ONE DIMENSIONAL
+import java.util.Scanner;
+import java.util.ArrayList;
+public class COM241_ARRAY {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String [] userName = new String[4];
+        
+        String [] names = {"Ana", "Jose", "Juan",}; 
+   
+        System.out.println("Enter a name: ");
+        String newNames = scan.nextLine();
+        
+        for (String name : names) {
+            System.out.print(name + ", ");
+        }
+        
+        System.out.print(newNames + "\n");
+        
+        System.out.println("Search index: ");
+        int index = scan.nextInt();
+        
+        System.out.println(names[index]);
+    }
+}
+
+//MULTIDIMENSIONAL ARRAY
+public class MULTIDIMENSIONAL_ARRAY {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String [] userName = new String[4];
+        
+        String [][] names = {{"Ana", "Jose", "Juan"},{"Amanda", "Kino", "Nica"}};
+   
+        System.out.println("Enter a name: ");
+        String newNames = scan.nextLine();
+        
+        
+        for(int i =0; i < names.length; i++){
+            for (int j = 0; j < names[i].length; i++){
+                System.out.println(names[i][j]);
+            }    
+        
+        /*
+        for (int i = 0; i < names.length; i++) {
+            System.out.println("Enter name: ");
+            userName[i] = scan.nextLine(); 
+        }
+        */
+        
+        for (String[] name : names) {
+            System.out.print(name + ", ");
+        }
+        
+        System.out.print(newNames + "\n");
+        
+        System.out.println("Search index: ");
+        int index = scan.nextInt();
+        
+        System.out.println(names[index]);
+    
+        }
+    }
+}

@@ -1,0 +1,19 @@
+
+public class J_OOP {
+    String breed;
+    int age;
+    String color;
+    
+    public J_OOP(String breed, int age, String color){
+        breed = this.breed;
+        age = this.age;
+        color = this.color;
+    }    
+    public void bark() {
+        System.out.println("The dog is howling");    
+    }
+    public static void main(String[] args) {
+        J_OOP dog1 = new J_OOP("Golden Retriever", 17, "Yellow");
+        dog1.bark();
+    }
+}
