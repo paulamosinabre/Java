@@ -1,0 +1,75 @@
+// factorial
+import java.util.Scanner;
+class Main {
+   
+    public static void factorial(int num){
+        int factorial = 1;
+        for(int i = 1; i<=num; i++){
+            factorial *= i;
+        }
+        System.out.println("Factorial: " + factorial);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = scan.nextInt();
+        factorial(num);
+        
+    }
+    
+}
+
+//factor
+
+import java.util.Scanner;
+class Main {
+    
+    public static void factor(int num2){
+        System.out.print("Factors: ");
+        for(int i = 1; i <= num2; i++){
+            if(num2 % i == 0){
+                System.out.print(i + " ");
+            }
+            
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num2 = scan.nextInt();
+        factor(num2);
+        
+    }
+    
+}
+
+//occurence
+import java.util.Scanner;
+
+class Main {
+   static Scanner scan = new Scanner(System.in);
+
+    public static void letters() {
+        System.out.print("Enter a string: ");
+        String words = scan.nextLine();
+        
+        System.out.print("Count: ");
+        char myChar = scan.next().charAt(0);  
+        
+        int count = 0;  
+        
+        for (int i = 0; i < words.length(); i++) {
+            if (words.charAt(i) == myChar) {
+                count++;  
+            }
+        }
+        System.out.println(myChar + " occurs " + count + " times");
+    }
+
+    public static void main(String[] args) {
+        letters();  
+    }
+}
