@@ -1,0 +1,68 @@
+// EX 1
+public class Methods {
+
+    public static void addition(int num1, int num2){
+        int sum = num1 + num2;
+        System.out.println("Sum: " + sum);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        int num1, num2;
+        System.out.println("Enter the first number");
+        num1 = scan.nextInt();
+        
+        System.out.println("Enter the second number");
+        num2 = scan.nextInt();
+        
+        addition(num1, num2);
+        
+    }
+}
+
+//2 PASS OR FAIL
+public class Methods {
+
+    public static void checkGrade(int grade){
+        if(grade >= 75 && grade <= 100){
+            System.out.println("You Passed!");
+        } else if (grade >= 0 && grade <= 75){
+            System.out.println("You Failed");
+        } else {
+            System.out.println("Invalid! Tf are you writing !?");
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.print("Enter your grade: ");
+        int grade = scan.nextInt();
+        
+        checkGrade(grade);
+    }
+}
+
+//3 addition of 1 to user input
+import java.util.Scanner;
+class Main {
+    
+    public static void addition(int num){
+        int sum = 0;
+        for(int i = 1; i<=num; i++){
+            sum += i;
+        }
+        System.out.println("Sum: " + sum);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.print("Enter number: ");
+        int num = scan.nextInt();
+        
+        addition(num);
+        
+    }
+}
