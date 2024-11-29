@@ -1,0 +1,29 @@
+//EXAMPLE 1
+
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+	 Scanner input = new Scanner(System.in);
+  System.out.print("Enter size: ");
+  
+  int size = input.nextInt();
+  int [] numbers = new int[size];
+  
+  //to input values
+      for(int i = 0; i < size; i++){
+          System.out.print("Enter a number: ");
+          numbers[i] = input.nextInt();
+      }
+//output of the values
+System.out.print("Numbers: ");
+    for(int i = 0; i < size; i++){
+        System.out.print(numbers[i] + " ");
+    }
+// using for-each
+        for(int num: numbers){
+            System.out.println(num + " ");
+        }
+  }
+}
+
