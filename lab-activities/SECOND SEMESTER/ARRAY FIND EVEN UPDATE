@@ -1,0 +1,63 @@
+
+import java.util.Scanner;
+// use 1 array
+// find
+// even numbers
+//update
+public class ArrayCOM {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter size: ");
+
+        int size = input.nextInt();
+        int[] numbers = new int[size];
+
+        //to input values
+        for (int i = 0; i < size; i++) {
+            System.out.print("Enter a number: ");
+            numbers[i] = input.nextInt();
+        }
+        
+        System.out.print("Numbers: ");
+        // output using for-each
+        for(int num: numbers){
+            System.out.print(num + " ");
+        }
+       
+        //find
+        System.out.print("\nFind: ");
+        int find = input.nextInt();
+         for(int i = 0; i < size; i++){
+             if(find == numbers[i]){
+                 System.out.println(find + " is at index " + i);
+             } 
+         }
+         
+         //even numbers
+        System.out.print("\nEven numbers: ");
+         int even = 0;
+         for (int i = 0; i < size; i++) {
+            if(numbers[i] % 2 == 0){
+                System.out.print(numbers[i] + " ");
+                even++;  
+            }     
+        }
+        System.out.println("\nThere are " + even + " even numbers");
+        System.out.println("");
+        //update
+        System.out.print("Update: ");
+        int update = input.nextInt();
+        
+        System.out.print("New Value: ");
+        int newValue = input.nextInt();
+        System.out.println("Numbers:");
+        for(int i = 0; i < size; i++){
+            if(update == numbers[i]){
+                numbers[i] = newValue;
+            }
+            System.out.print(numbers[i] + " ");
+        }
+        
+    }
+}
