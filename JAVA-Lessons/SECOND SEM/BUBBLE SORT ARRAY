@@ -1,0 +1,38 @@
+public class Array {
+
+    static Scanner scan = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.print("Enter size: ");
+        int size = scan.nextInt();
+        int[] array = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            System.out.print("Enter element: ");
+            array[i] = scan.nextInt();
+        }
+
+        for (int element : array) {
+            System.out.print(element + " ");
+        }
+
+        //sort
+        int temp;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if(array[i] < array[j]){
+                    temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+        
+        //output
+        System.out.print("\nSorted Array");
+        for(int element: array){
+            System.out.print(element + " ");
+        }
+    }
+}
