@@ -1,0 +1,28 @@
+public class Array {
+    static Scanner scan = new Scanner(System.in);
+    
+    public static void input(int[] array, int size){
+        //input
+        for(int i = 0; i < size; i++){
+            System.out.print("Enter element: ");
+            array[i] = scan.nextInt();
+        }
+    }
+    
+    public static void output(int [] array, int size){
+        //output
+        for(int element: array){
+            System.out.print(element + " ");
+        }
+    }
+    
+    public static void main(String[] args) {
+        
+        System.out.print("Enter size: ");
+        int size = scan.nextInt();
+        int [] array = new int[size];
+        input(array, size);
+        output(array, size);
+        
+    }
+}
