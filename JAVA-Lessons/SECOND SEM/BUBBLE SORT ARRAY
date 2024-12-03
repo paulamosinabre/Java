@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class Array {
 
     static Scanner scan = new Scanner(System.in);
@@ -34,5 +35,8 @@ public class Array {
         for(int element: array){
             System.out.print(element + " ");
         }
+
+        //using library code
+        Arrays.sort(array);
     }
 }
