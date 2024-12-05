@@ -68,3 +68,90 @@ public class Assignment1 {
         System.out.println("Sum: " + sum);
     }
 }
+
+//using parameter passing
+public class Assignment1 {
+    //allows the variables to be accessed in any method
+    static Scanner scan = new Scanner(System.in);
+    static int rows;
+    static int columns;
+    
+    public static void find(int[][] array){
+        //find
+        System.out.print("\nFind: ");
+        int find = scan.nextInt();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (find == array[i][j]) {
+                    System.out.print(find + " is at row " + i + ", column " + j);
+                }
+            }
+        }
+        System.out.println(" ");
+    }
+    
+    public static void min(int[][] array){
+        //min max
+        int min = array[0][0];
+        int max = array[0][0];
+        
+       for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+               if(min > array[i][j]) {
+                   min = array[i][j];
+                }
+               
+               if(max < array[i][j]){
+                   max = array[i][j];
+               }
+            }  
+        }
+        System.out.println("\nMinimum: " + min);
+        System.out.println("Maximum: " + max);
+        
+    }
+    
+    public static void sum(int[][] array){
+        //sum
+        int sum = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                sum += array[i][j];
+            }
+        }
+        System.out.print("\nSum: " + sum);
+    }
+    
+    public static void main(String[] args) {
+        System.out.print("Enter rows: ");
+        rows = scan.nextInt();
+        
+        System.out.print("Enter columns: ");
+        columns = scan.nextInt();
+        
+        int[][] array = new int [rows][columns];
+        
+        //input
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                System.out.print("Enter a number: ");
+                array[i][j] = scan.nextInt();
+            }
+        }    
+        
+        //output
+        System.out.println("Array elements: ");
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.print("\n");
+        }    
+        
+        find(array);
+        min(array);
+        sum(array);
+    }
+}
+
