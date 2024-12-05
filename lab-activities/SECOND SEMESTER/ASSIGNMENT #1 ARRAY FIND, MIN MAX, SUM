@@ -1,0 +1,70 @@
+public class Assignment1 {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.print("Enter rows: ");
+        int rows = scan.nextInt();
+        
+        System.out.print("Enter columns: ");
+        int columns = scan.nextInt();
+        
+        int[][] array = new int [rows][columns];
+        
+        //input
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                System.out.print("Enter a number: ");
+                array[i][j] = scan.nextInt();
+            }
+        }    
+        
+        //output
+        System.out.println("Array elements: ");
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.print("\n");
+        }    
+        //find
+        System.out.print("\nFind: ");
+        int find = scan.nextInt();
+        
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+               if(find == array[i][j]){
+                   System.out.print(find + " is at row " + i + ", column " + j);
+               } 
+            } 
+        }    
+        System.out.println(" ");
+        
+        //min max
+        int min = array[0][0];
+        int max = array[0][0];
+        
+       for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+               if(min > array[i][j]) {
+                   min = array[i][j];
+                }
+               
+               if(max < array[i][j]){
+                   max = array[i][j];
+               }
+            }  
+        }
+        System.out.println("Minimum: " + min);
+        System.out.println("Maximum: " + max);
+        
+        //sum
+        int sum = 0;
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                sum += array[i][j];
+            }
+        }   
+        System.out.println("Sum: " + sum);
+    }
+}
