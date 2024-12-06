@@ -1,0 +1,28 @@
+
+public class Main {
+    static int total;
+    public static void factor(int num, int i) {
+        if (i > num) {
+            return;
+        }
+        
+        if (num % i == 0) {
+            System.out.print(i + " ");
+            total++;
+        }
+
+        factor(num, i + 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.print("Enter a number: ");
+        int num = scan.nextInt();
+        
+        System.out.print("Factors of " + num + ": ");
+        factor(num, 1);
+        
+        System.out.println("\n" + num + "has " + total + " factors");
+    }
+}
