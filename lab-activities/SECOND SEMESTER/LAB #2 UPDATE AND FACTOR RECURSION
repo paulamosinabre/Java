@@ -1,0 +1,63 @@
+import java.util.*;
+class Main {
+    static int total;
+    
+    public static void factor(int num, int i) {
+        if(i > num){
+            return;
+        }
+        if (num % i == 0) {
+            System.out.print(i + " ");
+            total++;
+        }
+
+        factor(num, i + 1);
+    }
+
+    public static void main(String[] args) {
+       ArrayList<String> names = new ArrayList<>();
+       Scanner scan = new Scanner(System.in);
+       
+       System.out.print("How many items to add? ");
+       int size = scan.nextInt();
+       scan.nextLine();
+       
+       //input
+       for(int i = 0; i < size; i++){
+           System.out.print("Enter name: ");
+           String name = scan.nextLine();
+           names.add(name);
+       }
+       //output
+       System.out.print("Names: ");
+       
+       for(String name: names) {
+           System.out.print(name + " ");
+       }
+       System.out.println(" ");
+       //update
+       System.out.print("Update: ");
+       String update = scan.nextLine();
+       
+       System.out.print("New value: ");
+       String newName = scan.nextLine();
+      
+       names.set(names.indexOf(update), newName);
+       
+       //output
+       System.out.print("Names: ");
+       
+       for(String name: names) {
+           System.out.print(name + " ");
+       }
+       System.out.println(" ");
+       
+       System.out.print("Enter a number: ");
+        int num = scan.nextInt();
+        
+        System.out.print("Factors of " + num + ": ");
+        factor(num, 1);
+        
+        System.out.println("\n" + num + " has " + total + " factors");
+    }
+}
