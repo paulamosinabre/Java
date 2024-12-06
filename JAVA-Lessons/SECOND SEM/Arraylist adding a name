@@ -1,0 +1,24 @@
+import java.util.*;
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.print("How many items to add? ");
+        int size = scan.nextInt();
+        scan.nextLine();
+
+        //input
+        for(int i = 0; i < size; i++){
+            System.out.print("Enter a name: ");
+            String user = scan.nextLine();
+            names.add(user);
+        }
+        //output
+        System.out.print("Names: ");
+        for(String name: names) {
+            System.out.print(name + " ");
+        }
+    }
+}
