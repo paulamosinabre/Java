@@ -1,0 +1,16 @@
+
+class Main {
+    public static void main(String[] args) {
+        int numerator = 38;
+        int denominator = 50;
+        
+        try {
+            int result = numerator / denominator;
+            System.out.println("Result: " + result);
+        } catch (Exception e){
+            System.out.println("ih");
+        } finally {
+            System.out.println("what what what");
+        }
+    }
+}
