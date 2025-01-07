@@ -1,0 +1,11 @@
+
+package com.mycompany.oop_principles;
+
+// ;ahat ng meron si student meron siya
+public class SHSStudent extends Student {
+    String strand = "STEM";
+    
+    public void displayStrand(){
+        System.out.print("\nStrand: " + strand);
+    }
+}
