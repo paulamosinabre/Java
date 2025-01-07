@@ -1,0 +1,11 @@
+
+package com.mycompany.oop_principles;
+
+public class Student {
+    String student_number = "2024-123456";
+    String student_name = "Bby ko";
+    
+    public void displayInfo(){
+        System.out.println("Student number: " + student_number + "\nStudent name: " + student_name);
+    }
+}
