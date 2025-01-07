@@ -1,0 +1,18 @@
+
+package com.mycompany.oop_principles;
+// to implement inheritance, use extends
+// lahat ng meron si student makukuha niya
+public class CollegeStudent extends Student {
+    String course = "BSCS-ML";
+    
+    @Override
+    //should have the same return type
+    public void displayInfo(){
+        System.out.print("2024-111111");
+        System.out.println("\nHwang Hyunjin");
+    }
+    
+    public void displayCourse(){
+        System.out.print("\nCourse:" + course);
+    }
+}
