@@ -1,0 +1,12 @@
+
+public class OOP_PRINCIPLES {
+    
+    public static void main(String[] args) {
+        CollegeStudent students = new CollegeStudent();
+        students.displayInfo();
+        students.displayCourse();
+        
+        SHSStudent stud = new SHSStudent();
+        stud.displayStrand();
+    }
+}
