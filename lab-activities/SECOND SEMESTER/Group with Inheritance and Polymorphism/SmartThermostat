@@ -28,3 +28,41 @@ public class SmartThermostat extends Appliance {
         System.out.println(getName() + " is " + (isPowerOn() ? "On" : "Off") + "The temperature is " + temperature + "Mode:" + mode);
     }
 }
+
+ORRRRRRRRRRRRR
+
+package com.mycompany.smarthome;
+
+import java.util.Scanner;
+public class SmartThermostat extends Appliance {
+    double temperature;
+    String mode;
+    private Scanner scan = new Scanner(System.in);
+    
+    public SmartThermostat(){
+        this.temperature = 23;
+        this.mode = "cold"; // default if did not change  
+    }
+    
+    public void setTemperature(){
+        System.out.println("Enter new temperature: ");
+        double temp = scan.nextDouble();
+        System.out.println("Temperature is now set to " + temp + " °C");
+    }
+    
+    public String changeMode(){
+        System.out.println("MODE");
+        System.out.println("[1] Cold");
+        System.out.println("[2] Warm");
+        System.out.println("Select mode: ");
+        int mode = scan.nextInt();
+        
+        if(mode == 1) {
+            return "Cold";
+        } else if (mode == 2){
+            return "Warm";
+        } else {
+            return "Invalid";
+        }
+    }
+}
