@@ -1,0 +1,74 @@
+package com.mycompany.smarthome;
+import java.util.Scanner;
+
+
+public class SmartHome {
+    static Scanner scan = new Scanner(System.in);
+      
+    public static void main(String[] args) {
+        
+        //Appliance smartlight = new Smartlight("Smartlight", 10);
+        Appliance thermostat = new SmartThermostat();
+        //Appliance[] appliances = {thermostat};
+        System.out.print("⋇⊶⊰❣ Smart Home Appliances ❣⊱⊷⋇");
+        chooseAppliances();
+        action();
+    }
+    
+    public static void chooseAppliances(){
+        System.out.println("✧༝┉˚*❋ Appliances ❋*˚┉༝✧");
+        //choose ka baks
+        System.out.println("[1] Smart light");
+        System.out.println("[2] Smart Thermostat");
+        System.out.println("[3] Smart Speaker");
+        System.out.println("[4] Smart Door Lock");
+        System.out.println("[5] Exit");
+        System.out.println("Choose an appliance");
+        
+        int chooseAppliance = scan.nextInt();
+        do {
+            if(chooseAppliance <= 4){
+                action();
+            } else {
+                System.out.println("Invalid");
+                chooseAppliances();
+            }
+        } while (chooseAppliance == 5);
+            System.out.println("Exiting...");
+            System.exit(0);
+    }
+            
+    
+    
+    public static void action(){
+        SmartThermostat thermos = new SmartThermostat();
+
+        System.out.println("✧༝┉˚*❋ Action ❋*˚┉༝✧");
+        System.out.println("[1] Turn ON");
+        System.out.println("[2] Turn OFF");
+        System.out.println("[3] Customize");
+        System.out.println("[4] View status");
+        System.out.println("[5] Exit");
+        System.out.println("Choose an action");
+        
+        int chooseAction = scan.nextInt();
+        switch(chooseAction){
+            case 1:
+            
+            case 2:
+            
+            case 3:
+                thermos.changeMode();
+                thermos.setTemperature();
+            case 4:
+            
+            case 5:
+                System.out.println("Exiting...");
+                System.exit(0);
+        }
+    }
+    
+    public static void customiseAppliances(){
+        
+    }
+}
