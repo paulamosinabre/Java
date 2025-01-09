@@ -1,0 +1,30 @@
+package com.mycompany.smarthome;
+
+public class SmartThermostat extends Appliance {
+    private double  temperature;
+    private String mode;
+    
+    public SmartThermostat(String name, double energyConsumption){
+        super (name, energyConsumption);
+        this.temperature = 25;
+        this.mode = "cold";
+    }
+   
+    public void setTemperature(double temp){
+        this.temperature = temp;
+        System.out.println("Temperature set to: " + temperature);
+    }
+    
+    public void changeMode(String mode){
+        if(mode.equalsIgnoreCase("cool") && (mode.equalsIgnoreCase("hot"))){
+            this.mode = mode;
+            System.out.println("Mode is set to: " + mode);
+        } else {
+            System.out.println("Invalid mode. Choose between cool and hot.");
+        }
+    }
+    
+    public void getStatus(){
+        System.out.println(getName() + " is " + (isPowerOn() ? "On" : "Off") + "The temperature is " + temperature + "Mode:" + mode);
+    }
+}
