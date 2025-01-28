@@ -1,0 +1,193 @@
+
+package com.mycompany.colorm;
+
+import java.awt.Color;
+import javax.swing.JFrame;
+
+public class NewJFrame extends javax.swing.JFrame {
+
+   
+    public NewJFrame() {
+        initComponents();
+    }
+   
+    JFrame frame = new JFrame("Color Mixer");
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        ColorMixer = new javax.swing.JPanel();
+        txtGreen = new javax.swing.JTextField();
+        txtBlue = new javax.swing.JTextField();
+        txtRed = new javax.swing.JTextField();
+        pnlResult = new javax.swing.JPanel();
+        btnApply = new javax.swing.JButton();
+        lblR = new javax.swing.JLabel();
+        lblG = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        ColorMixer.setBackground(new java.awt.Color(255, 204, 204));
+
+        txtGreen.setFont(new java.awt.Font("RomanD", 1, 18)); // NOI18N
+        txtGreen.setBorder(null);
+        txtGreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGreenActionPerformed(evt);
+            }
+        });
+
+        txtBlue.setFont(new java.awt.Font("RomanD", 1, 18)); // NOI18N
+        txtBlue.setBorder(null);
+        txtBlue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBlueActionPerformed(evt);
+            }
+        });
+
+        txtRed.setFont(new java.awt.Font("RomanD", 1, 18)); // NOI18N
+        txtRed.setBorder(null);
+        txtRed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRedActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlResultLayout = new javax.swing.GroupLayout(pnlResult);
+        pnlResult.setLayout(pnlResultLayout);
+        pnlResultLayout.setHorizontalGroup(
+            pnlResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 212, Short.MAX_VALUE)
+        );
+        pnlResultLayout.setVerticalGroup(
+            pnlResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 167, Short.MAX_VALUE)
+        );
+
+        btnApply.setFont(new java.awt.Font("RomanD", 1, 18)); // NOI18N
+        btnApply.setText("apply");
+        btnApply.setBorder(null);
+        btnApply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyActionPerformed(evt);
+            }
+        });
+
+        lblR.setFont(new java.awt.Font("RomanD", 1, 18)); // NOI18N
+        lblR.setText("R");
+
+        lblG.setFont(new java.awt.Font("RomanD", 1, 18)); // NOI18N
+        lblG.setText("G");
+
+        lblB.setFont(new java.awt.Font("RomanD", 1, 18)); // NOI18N
+        lblB.setText("B");
+
+        javax.swing.GroupLayout ColorMixerLayout = new javax.swing.GroupLayout(ColorMixer);
+        ColorMixer.setLayout(ColorMixerLayout);
+        ColorMixerLayout.setHorizontalGroup(
+            ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ColorMixerLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColorMixerLayout.createSequentialGroup()
+                        .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblG)
+                            .addComponent(lblR)
+                            .addComponent(lblB))
+                        .addGap(35, 35, 35)
+                        .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRed, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBlue, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
+                        .addComponent(pnlResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColorMixerLayout.createSequentialGroup()
+                        .addComponent(btnApply, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(205, 205, 205)))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+        ColorMixerLayout.setVerticalGroup(
+            ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ColorMixerLayout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBlue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblB))
+                        .addComponent(pnlResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ColorMixerLayout.createSequentialGroup()
+                        .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRed, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblR))
+                        .addGap(39, 39, 39)
+                        .addGroup(ColorMixerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblG))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(btnApply)
+                .addGap(72, 72, 72))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ColorMixer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ColorMixer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void txtGreenActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        
+    }                                        
+
+    private void txtBlueActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
+    private void txtRedActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void btnApplyActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        String r = txtRed.getText();
+        String g = txtGreen.getText();
+        String b = txtBlue.getText();
+        
+        String color = "%" + r + g + b;
+        
+        pnlResult.setBackground(Color.decode(color));
+    }                                        
+
+   
+    
+    public static void main(String args[]) {
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewJFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JPanel ColorMixer;
+    private javax.swing.JButton btnApply;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblG;
+    private javax.swing.JLabel lblR;
+    private javax.swing.JPanel pnlResult;
+    private javax.swing.JTextField txtBlue;
+    private javax.swing.JTextField txtGreen;
+    private javax.swing.JTextField txtRed;
+    // End of variables declaration                   
+}
