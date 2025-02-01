@@ -1,294 +1,247 @@
-package com.mycompany.guessthenumber;
 
-import java.util.Random;
+package com.mycompany.rockpaperscissor;
+
+import javax.swing.ImageIcon;
 
 public class MyFrame extends javax.swing.JFrame {
-    int guess, random, start, end, diff, tries = 0;
+
+   ImageIcon image_rock;
+   ImageIcon image_paper;
+   ImageIcon image_scissors;
+   int userPick;
+   int random;
+   
     public MyFrame() {
         initComponents();
     }
 
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        btnGenerate = new javax.swing.JButton();
-        txtStart = new javax.swing.JTextField();
-        lblStart = new javax.swing.JLabel();
+        imgRock = new javax.swing.JLabel();
+        imgPaper = new javax.swing.JLabel();
+        imgScissors = new javax.swing.JLabel();
+        lblRock = new javax.swing.JLabel();
+        lblPaper = new javax.swing.JLabel();
+        lblScissors = new javax.swing.JLabel();
+        lblComputer = new javax.swing.JLabel();
+        lblVs = new javax.swing.JLabel();
+        lblYou = new javax.swing.JLabel();
         lblResult = new javax.swing.JLabel();
-        lblNumTries = new javax.swing.JLabel();
-        NumTries = new javax.swing.JLabel();
-        lblEnd = new javax.swing.JLabel();
-        txtEnd = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        Result = new javax.swing.JLabel();
-        txtUserGuess = new javax.swing.JTextField();
-        lblUserGuess = new javax.swing.JLabel();
-        btnGuess = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        imgComp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
         title.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 24)); // NOI18N
-        title.setForeground(new java.awt.Color(255, 0, 102));
-        title.setText("Guessing Game");
+        title.setForeground(new java.awt.Color(51, 51, 51));
+        title.setText("ROCK PAPER SCISSORS");
 
-        btnGenerate.setBackground(new java.awt.Color(255, 0, 102));
-        btnGenerate.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        btnGenerate.setForeground(new java.awt.Color(255, 255, 255));
-        btnGenerate.setText("Generate");
-        btnGenerate.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerateActionPerformed(evt);
+        imgRock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/rockpaperscissor/rock.png"))); // NOI18N
+        imgRock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgRockMousePressed(evt);
             }
         });
 
-        txtStart.setBackground(new java.awt.Color(255, 204, 255));
-        txtStart.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        txtStart.setForeground(new java.awt.Color(51, 51, 51));
-        txtStart.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStartActionPerformed(evt);
+        imgPaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/rockpaperscissor/paper.png"))); // NOI18N
+        imgPaper.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgPaperMouseClicked(evt);
             }
         });
 
-        lblStart.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        lblStart.setForeground(new java.awt.Color(51, 51, 51));
-        lblStart.setText("Start");
-
-        lblResult.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        lblResult.setForeground(new java.awt.Color(255, 0, 102));
-
-        lblNumTries.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNumTries.setForeground(new java.awt.Color(51, 51, 51));
-
-        NumTries.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        NumTries.setForeground(new java.awt.Color(255, 0, 102));
-        NumTries.setText("Number of tries");
-
-        lblEnd.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        lblEnd.setForeground(new java.awt.Color(51, 51, 51));
-        lblEnd.setText("End");
-
-        txtEnd.setBackground(new java.awt.Color(255, 204, 255));
-        txtEnd.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        txtEnd.setForeground(new java.awt.Color(51, 51, 51));
-        txtEnd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtEnd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEndActionPerformed(evt);
+        imgScissors.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/rockpaperscissor/scissors.png"))); // NOI18N
+        imgScissors.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgScissorsMouseClicked(evt);
             }
         });
 
-        Result.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        Result.setForeground(new java.awt.Color(255, 0, 102));
-        Result.setText("Result:");
+        lblRock.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
+        lblRock.setForeground(new java.awt.Color(51, 51, 51));
+        lblRock.setText("Rock");
 
-        txtUserGuess.setBackground(new java.awt.Color(255, 204, 255));
-        txtUserGuess.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        txtUserGuess.setForeground(new java.awt.Color(51, 51, 51));
-        txtUserGuess.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtUserGuess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserGuessActionPerformed(evt);
-            }
-        });
+        lblPaper.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
+        lblPaper.setForeground(new java.awt.Color(51, 51, 51));
+        lblPaper.setText("Paper");
 
-        lblUserGuess.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        lblUserGuess.setForeground(new java.awt.Color(51, 51, 51));
-        lblUserGuess.setText("My Guess");
+        lblScissors.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
+        lblScissors.setForeground(new java.awt.Color(51, 51, 51));
+        lblScissors.setText("Scissors");
 
-        btnGuess.setBackground(new java.awt.Color(255, 0, 102));
-        btnGuess.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        btnGuess.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuess.setText("Guess");
-        btnGuess.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGuess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuessActionPerformed(evt);
-            }
-        });
+        lblComputer.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 18)); // NOI18N
+        lblComputer.setForeground(new java.awt.Color(51, 51, 51));
+        lblComputer.setText("COMPUTER");
+
+        lblVs.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
+        lblVs.setForeground(new java.awt.Color(51, 51, 51));
+        lblVs.setText("VS");
+
+        lblYou.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 18)); // NOI18N
+        lblYou.setForeground(new java.awt.Color(51, 51, 51));
+        lblYou.setText("YOU");
+
+        lblResult.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 18)); // NOI18N
+        lblResult.setForeground(new java.awt.Color(255, 0, 153));
+        lblResult.setText("RESULT");
+
+        imgComp.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
+        imgComp.setForeground(new java.awt.Color(51, 51, 51));
+        imgComp.setText("waiting for opponent...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStart)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblResult)
-                            .addComponent(lblNumTries)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblEnd)
-                        .addGap(56, 56, 56)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStart, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Result)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(NumTries, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lblUserGuess)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtUserGuess, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGuess, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(281, 281, 281)
-                .addComponent(title)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(title))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgRock)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblRock)))
+                        .addGap(100, 100, 100)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblYou)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(imgPaper)
+                                .addGap(103, 103, 103)
+                                .addComponent(imgScissors))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(153, 153, 153)
+                                        .addComponent(jLabel12))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblPaper)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblScissors))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addComponent(lblResult))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(311, 311, 311)
+                        .addComponent(lblVs))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgComp)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lblComputer)))))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(34, 34, 34)
                 .addComponent(title)
+                .addGap(32, 32, 32)
+                .addComponent(lblYou)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtStart, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblStart)
-                            .addComponent(txtUserGuess, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUserGuess))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEnd)
-                            .addComponent(txtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Result))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(NumTries)
-                                .addGap(29, 29, 29)
-                                .addComponent(btnGuess, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(82, 82, 82)))
+                    .addComponent(imgRock)
+                    .addComponent(imgPaper)
+                    .addComponent(imgScissors))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRock)
+                    .addComponent(lblPaper)
+                    .addComponent(lblScissors))
+                .addGap(24, 24, 24)
+                .addComponent(lblVs)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addComponent(imgComp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(lblResult)
-                .addGap(45, 45, 45)
-                .addComponent(lblNumTries)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblComputer)
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1245, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(618, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>                        
 
-    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //kuhain yung start to end
-        
-        try {
-        // Validate input
-        if (txtStart.getText().isEmpty() || txtEnd.getText().isEmpty()) {
-            Result.setText("Please enter valid numbers.");
-            return;
-        }
-
-        // Get start and end values
-        start = Integer.parseInt(txtStart.getText());
-        end = Integer.parseInt(txtEnd.getText());
-
-        if (start >= end) {
-            Result.setText("Start should be less than End.");
-            return;
-        }
-
-        // Generate a random number within the range
-        diff = end - start + 1;
-        random = (int) (Math.random() * diff) + start;
-
-        // Reset tries
-        tries = 0;
-        lblNumTries.setText("Number of tries: " + tries);
-
-        // Reset result message
-        Result.setText("Number generated! Make a guess.");
-    } catch (NumberFormatException e) {
-        Result.setText("Invalid input. Enter numbers only.");
-    }
-
-    }                                           
-
-
-    private void txtStartActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void imgRockMousePressed(java.awt.event.MouseEvent evt) {                                     
         // TODO add your handling code here:
+        userPick = 1;
+    }                                    
+
+    private void imgPaperMouseClicked(java.awt.event.MouseEvent evt) {                                      
+        // TODO add your handling code here:
+        userPick = 2; 
+    }                                     
+
+    private void imgScissorsMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        userPick = 3;
     }                                        
-
-    private void txtEndActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        // TODO add your handling code here:
-    }                                      
-
-    private void txtUserGuessActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-    }                                            
-
-    private void btnGuessActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    
+  
+    private void computerGenerator(){
+        int diff = 3 - 2 + 1;
+        random = (int) Math.random() * diff + 1;
         
-try {
-        // Validate input
-        if (txtUserGuess.getText().isEmpty()) {
-            Result.setText("Please enter a guess.");
-            return;
-        }
-
-        // Get the user's guess
-        guess = Integer.parseInt(txtUserGuess.getText());
-
-        // Increment the number of tries
-        tries++;
-
-        // Check if the guess is correct
-        if (guess < random) {
-            Result.setText("Higher!");
-        } else if (guess > random) {
-            Result.setText("Lower!");
+        //display image of pick
+        if(random == 1){
+             imgComp.setText("Rock");
+        } else if(random == 2){
+            imgComp.setText("Paper");
         } else {
-            Result.setText("CORRECT!");
-            lblNumTries.setText("Number of tries: " + tries);
+             imgComp.setText("Scissor");
         }
-    } catch (NumberFormatException e) {
-        Result.setText("Invalid guess. Enter a number.");
     }
-
-
-        
-    }                                        
-
+    
+    private void winOrLose(){
+        if(userPick == random){
+            lblResult.setText("Draw");
+        } else if (userPick == 1 && random == 2){
+            lblResult.setText("You Lose!");
+        } else if (userPick == 1 && random == 3){
+            lblResult.setText("You Won!");
+        } else if (userPick == 2 && random == 1){
+            lblResult.setText("You Won!");
+        } else if (userPick == 2 && random == 3){
+            lblResult.setText("You Lose!");
+        } else if(userPick == 3 && random == 1){
+            lblResult.setText("You Lose!");
+        } else if(userPick == 3 && random == 2){
+            lblResult.setText("You Win!");
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -322,20 +275,19 @@ try {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JLabel NumTries;
-    private javax.swing.JLabel Result;
-    private javax.swing.JButton btnGenerate;
-    private javax.swing.JButton btnGuess;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel imgComp;
+    private javax.swing.JLabel imgPaper;
+    private javax.swing.JLabel imgRock;
+    private javax.swing.JLabel imgScissors;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblEnd;
-    private javax.swing.JLabel lblNumTries;
+    private javax.swing.JLabel lblComputer;
+    private javax.swing.JLabel lblPaper;
     private javax.swing.JLabel lblResult;
-    private javax.swing.JLabel lblStart;
-    private javax.swing.JLabel lblUserGuess;
+    private javax.swing.JLabel lblRock;
+    private javax.swing.JLabel lblScissors;
+    private javax.swing.JLabel lblVs;
+    private javax.swing.JLabel lblYou;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField txtEnd;
-    private javax.swing.JTextField txtStart;
-    private javax.swing.JTextField txtUserGuess;
     // End of variables declaration                   
 }
