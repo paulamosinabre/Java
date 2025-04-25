@@ -1,51 +1,49 @@
-package com.mycompany.vehicletracker;
-
 import java.util.Scanner;
 
-public class VehicleTracker {
+public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Enter details for a Car: ");
         System.out.print("Brand: ");
-        String carBrand = scan.nextLine();
+        String brandCar = scan.nextLine();
         System.out.print("Model: ");
-        String carModel = scan.nextLine();
+        String modelCar = scan.nextLine();
         System.out.print("Distance Traveled (km): ");
-        double carDistance = scan.nextDouble();
+        double distanceCar = scan.nextDouble();
         scan.nextLine();
         System.out.print("Fuel Used (liters): ");
-        double carFuel = scan.nextDouble();
+        double fuelCar = scan.nextDouble();
         scan.nextLine();
-        Vehicle car = new Car(carBrand, carModel, carDistance, carFuel);
+        Vehicle car = new Car(brandCar, modelCar, distanceCar, fuelCar);
 
         //get user input for bike
         System.out.println("\nEnter details for a Bike: ");
         System.out.print("Brand: ");
-        String bikeBrand = scan.nextLine();
+        String brandBike = scan.nextLine();
         System.out.print("Model: ");
-        String bikeModel = scan.nextLine();
+        String modelBike = scan.nextLine();
         System.out.print("Distance Traveled (km): ");
-        double bikeDistance = scan.nextDouble();
+        double distanceBike = scan.nextDouble();
         scan.nextLine();
 
-        Vehicle bike = new Bike(bikeBrand, bikeModel, bikeDistance);
+        Vehicle bike = new Bike(brandBike, modelBike, distanceBike);
 
         //get user input for truck
         System.out.println("\nEnter details for a Truck: ");
         System.out.print("Brand: ");
-        String truckBrand = scan.nextLine();
+        String brandTruck = scan.nextLine();
         System.out.print("Model: ");
-        String truckModel = scan.nextLine();
+        String modelTruck = scan.nextLine();
         System.out.print("Distance Traveled (km): ");
-        double truckDistance = scan.nextDouble();
+        double distanceTruck = scan.nextDouble();
         scan.nextLine();
         System.out.print("Fuel Used (liters): ");
-        double truckFuel = scan.nextDouble();
+        double fuelTruck = scan.nextDouble();
         scan.nextLine();
 
-        Vehicle truck = new Truck(bikeBrand, truckModel, truckDistance, truckFuel);
+        Vehicle truck = new Truck(brandTruck, modelTruck, distanceTruck, fuelTruck);
 
         System.out.println("\n---Vehicle Summary---");
         car.getInfo();
