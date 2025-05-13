@@ -7,7 +7,8 @@ public class TaskManagement {
 
     static Scanner scan = new Scanner(System.in);
     static ArrayList<Login> users = new ArrayList<>();
-    static String username;
+    static String username, userTask, category, priority, date;
+    static Login login;
 
     public static void start() {
         System.out.println("\nChoose an option: ");
@@ -43,11 +44,11 @@ public class TaskManagement {
         String pass = scan.nextLine();
 
         boolean found = false;
-        for (Login login : users) {
-            
-            if (login.getUsername().equals(user)) {
+        for (Login userObj : users) {
+            if (userObj.getUsername().equals(user)) {
                 found = true;
-                if (pass.equals(login.getPassword())) {
+                if (pass.equals(userObj.getPassword())) {
+                    login = userObj;
                     taskInterface();
                 } else {
                     System.out.println("Incorrect password!");
@@ -65,28 +66,29 @@ public class TaskManagement {
     public static void signup() {
         System.out.println("\n================== Sign Up ==================");
 
-        System.out.println("Enter your email: ");
+        System.out.print("Enter your email: ");
         String email = scan.nextLine();
 
-        System.out.println("Enter your first name: ");
+        System.out.print("Enter your first name: ");
         String firstName = scan.nextLine();
 
-        System.out.println("Enter your last name: ");
+        System.out.print("Enter your last name: ");
         String lastName = scan.nextLine();
 
-        System.out.println("Enter your username: ");
+        System.out.print("Enter your username: ");
         username = scan.nextLine();
 
-        System.out.println("Enter your password: ");
+        System.out.print("Enter your password: ");
         String password = scan.nextLine();
 
-        Login login = new Login(email, firstName, lastName, username, password);
+        login = new Login(email, firstName, lastName, username, password);
+        users.add(login);
 
         taskInterface();
     }
 
     public static void taskInterface() {
-        Task task = new Task();
+        TaskManager manager = login.getTaskManager();
         while (true) {
             System.out.println("\n================== Menu ==================");
             System.out.println("Choose an option:\n"
@@ -95,8 +97,9 @@ public class TaskManagement {
                     + "3. Edit\n"
                     + "4. Search\n"
                     + "5. Show list\n"
-                    + "6. Back \n"
-                    + "7. Exit\n");
+                    + "6. Show account details \n"
+                    + "7. Back \n"
+                    + "8. Exit");
 
             System.out.print("\nEnter your choice: ");
             int chooseTask = scan.nextInt();
@@ -106,68 +109,76 @@ public class TaskManagement {
                 case 1:
                     System.out.println("\n================== Add List ==================");
                     System.out.print("Enter your task: ");
-                    String userTask = scan.nextLine();
+                    userTask = scan.nextLine();
 
                     System.out.print("Set a category: ");
-                    String category = scan.nextLine();
+                    category = scan.nextLine();
 
                     System.out.print("Set date: ");
-                    String date = scan.nextLine();
+                    date = scan.nextLine();
 
                     System.out.print("Set priority: ");
-                    String priority = scan.nextLine();
-                    task.add(userTask);
-                    task.setCategory(category);
-                    task.setDate(date);
-                    task.setPriority(priority);
+                    priority = scan.nextLine();
+                    Task task = new Task(userTask, category, priority, date);
+                    manager.add(task);
 
                     break;
                 case 2:
                     System.out.println("\n================== Remove List ==================");
-                    if (task.getTodoList() == null) {
+                    if (manager.isEmpty()) {
                         System.out.println("Please create a to do list first!");
+                        break;
                     }
-                    task.print();
+                    manager.print();
                     System.out.print("\nChoose a number to remove: ");
                     int removeNum = scan.nextInt();
                     scan.nextLine();
-                    task.remove(removeNum);
+                    manager.remove(removeNum);
 
                     break;
                 case 3:
                     System.out.println("\n================== Edit List ==================");
-                    if (task.getTodoList() == null) {
+                    if (manager.isEmpty()) {
                         System.out.println("Please create a to do list first!");
+                        break;
                     }
-                    task.print();
+                    manager.print();
 
                     System.out.print("Choose a number to edit: ");
                     int num = scan.nextInt();
                     scan.nextLine();
 
-                    System.out.println("Enter a new task: ");
+                    System.out.print("Enter a new task: ");
                     String newTask = scan.nextLine();
 
-                    task.edit(num, newTask);
+                    manager.edit(num, newTask);
                     break;
                 case 4:
                     System.out.println("\n================== Search List ==================");
                     System.out.print("Search for: ");
                     String search = scan.nextLine();
-                    task.search(search);
+                    manager.search(search);
                     break;
                 case 5:
                     System.out.println("\n================== " + username + "'s List ==================");
-                    if (task.getTodoList() == null) {
+                    if (manager.isEmpty()) {
                         System.out.println("Please create a to do list first!");
+                        break;
                     }
-                    task.print();
+                    manager.print();
+                    break;
                 case 6:
-                    start();
+                    System.out.println("\n================== " + username + "'s Account ==================");
+                    login.showInformation();
+                    break;
                 case 7:
+                    start();
+                    break;
+                case 8:
                     System.exit(0);
                 default:
                     System.out.println("Please enter a number from 1-6.");
+                    break;
             }
         }
     }
