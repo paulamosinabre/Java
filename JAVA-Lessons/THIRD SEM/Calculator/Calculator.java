@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class Main {
     static String passcode;
-    static Calculator calc = new Calculator();
+    static Calculator calc = new Calculator(); 
 	static Scanner scan = new Scanner(System.in);
 	public static void main(String[] args){
 		System.out.print("Enter a passcode: ");
