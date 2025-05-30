@@ -5,6 +5,7 @@
 package com.mycompany.taskmanagementsystem;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -269,14 +270,17 @@ public class Home extends javax.swing.JFrame {
         taskCounter++;
         JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         rowPanel.setBackground(Color.white);
-       
-        JTextField txtTask = new JTextField(10);
+        //rowPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // <-- Important!
+        JLabel lbl = new JLabel("                                         ");
+        JLabel gap = new JLabel("      ");
+        JTextField txtTask = new JTextField(20);
         JComboBox<String> cbCategory = new JComboBox<>(new String[]{"Work", "Personal", "School"});
-        cbCategory.setEditable(true);
         JComboBox<String> cbStatus = new JComboBox<>(new String[]{"Not Started", "In Progress", "Done"});
 
         rowPanel.add(txtTask);
-        rowPanel.add(cbCategory);
+        rowPanel.add(lbl);
+        rowPanel.add(cbCategory); 
+        rowPanel.add(gap);
         rowPanel.add(cbStatus);
 
         taskPanel.add(rowPanel);
