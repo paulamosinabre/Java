@@ -262,7 +262,7 @@ public class Home extends javax.swing.JFrame {
         taskPanelLayout.setVerticalGroup(
             taskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 280, Short.MAX_VALUE)
-        );
+        ); 
 
         getContentPane().add(taskPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 750, 280));
 
