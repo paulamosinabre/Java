@@ -4,9 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class Home extends javax.swing.JFrame {
 
@@ -14,7 +20,7 @@ public class Home extends javax.swing.JFrame {
     private Registration register;
     private JPanel rowPanel;
     private JTextField dateField, txtTask, typeSubject;
-    private JComboBox <String> categoryBox, statusBox, priorityBox;
+    private JComboBox<String> categoryBox, statusBox, priorityBox;
 
     public Home(Registration register) {
         initComponents();
@@ -262,7 +268,7 @@ public class Home extends javax.swing.JFrame {
         taskPanelLayout.setVerticalGroup(
             taskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 280, Short.MAX_VALUE)
-        ); 
+        );
 
         getContentPane().add(taskPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 750, 280));
 
@@ -293,80 +299,45 @@ public class Home extends javax.swing.JFrame {
     private void btnAddTaskActionPerformed(java.awt.event.ActionEvent evt) {                                           
         taskCounter++;
 
-        rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        rowPanel.setBackground(Color.white);
-
-        // Set fixed size
-        rowPanel.setPreferredSize(new Dimension(taskPanel.getWidth(), 40));
-        rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40)); // prevent vertical stretching
-
-        // Create components
-        txtTask = new JTextField(15);
+        // Create components as local variables
+        JTextField txtTask = new JTextField(15);
         String[] categories = {"Personal", "School"};
-        categoryBox = new JComboBox<>(categories);
+        JComboBox<String> categoryBox = new JComboBox<>(categories);
 
         String[] statuses = {"Not Started", "In Progress", "Done"};
-        statusBox = new JComboBox<>(statuses);
+        JComboBox<String> statusBox = new JComboBox<>(statuses);
 
         String[] priorities = {"Low", "Medium", "High"};
-        priorityBox = new JComboBox<>(priorities);
+        JComboBox<String> priorityBox = new JComboBox<>(priorities);
 
-        typeSubject = new JTextField(10);
-        dateField = new JTextField(7);
+        JTextField typeSubject = new JTextField(10);
+        JTextField dateField = new JTextField(7);
+
+        // Create a new row panel for the task input
+        JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        rowPanel.setBackground(Color.white);
+        rowPanel.setPreferredSize(new Dimension(taskPanel.getWidth(), 40));
+        rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40)); // prevent vertical stretching
 
         // Add components with spacing
         rowPanel.add(Box.createHorizontalStrut(10));
         rowPanel.add(txtTask);
-        rowPanel.add(new JLabel(" "));
         rowPanel.add(Box.createHorizontalStrut(10));
         rowPanel.add(categoryBox);
-        rowPanel.add(new JLabel(" "));
         rowPanel.add(Box.createHorizontalStrut(10));
         rowPanel.add(statusBox);
-        rowPanel.add(new JLabel(" "));
         rowPanel.add(Box.createHorizontalStrut(10));
         rowPanel.add(priorityBox);
         rowPanel.add(Box.createHorizontalStrut(10));
-        rowPanel.add(new JLabel("  "));
         rowPanel.add(typeSubject);
         rowPanel.add(Box.createHorizontalStrut(10));
         rowPanel.add(dateField);
 
-        // Add to the panel
+        // Add to the panel at the bottom (append)
         taskPanel.add(rowPanel);
         taskPanel.revalidate();
         taskPanel.repaint();
-        
-        dateField.addActionListener(e -> {
-            showTaskDetails(null);
-        });
-        
-    }                                          
-    
-    private void refreshTaskList() {
-        taskPanel.removeAll();
-        for (Task task : register.getTaskManager().getTasks()) {
-            JPanel taskRow = new JPanel(new BorderLayout());
-           
-            JLabel taskLabel = new JLabel(task.toString());
-            JButton optionsButton = new JButton("...");
-            optionsButton.setPreferredSize(new Dimension(23,23));
-            optionsButton.setBackground(Color.WHITE);
 
-            optionsButton.addActionListener(e -> showTaskDetails(task));
-
-            taskRow.add(taskLabel, BorderLayout.CENTER);
-            taskRow.add(optionsButton, BorderLayout.EAST);
-            taskPanel.add(taskRow);
-        }
-
-        taskPanel.revalidate();
-        taskPanel.repaint();
-    }
-    
-    private void showTaskDetails(Task task) {
-        
-        // Define the save logic in a reusable method
         Runnable saveTask = () -> {
             String taskName = txtTask.getText().trim();
             String date = dateField.getText().trim();
@@ -374,6 +345,11 @@ public class Home extends javax.swing.JFrame {
             String status = (String) statusBox.getSelectedItem();
             String priority = (String) priorityBox.getSelectedItem();
             String typeOrSubject = typeSubject.getText().trim();
+
+            if (taskName.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Task name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             Task newTask;
             if ("Personal".equalsIgnoreCase(category)) {
@@ -384,27 +360,162 @@ public class Home extends javax.swing.JFrame {
                 newTask = new Task(taskName, category, status, priority, date);
             }
 
-            if (task != null) {
-                register.getTaskManager().removeTask(task);
-            }
-
             register.getTaskManager().add(newTask);
+
+            JPanel taskRow = createTaskPanel(newTask);
+            taskPanel.add(taskRow);
+
             taskPanel.remove(rowPanel);
-            refreshTaskList();
+
+            taskPanel.revalidate();
+            taskPanel.repaint();
         };
 
-        // Add key listener to each input field
-        KeyAdapter enterKeyListener = new KeyAdapter() {
+        dateField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     saveTask.run();
                 }
             }
-        };
+        });
 
-        dateField.addKeyListener(enterKeyListener);
-        
+    }                                          
+
+    private void refreshTaskList() {
+        taskPanel.removeAll();
+
+        ArrayList<Task> tasks = register.getTaskManager().getTasks();
+        for (Task task : tasks) {
+            JPanel taskRow = createTaskPanel(task);
+            taskPanel.add(taskRow);
+        }
+
+        taskPanel.revalidate();
+        taskPanel.repaint();
+
+    }
+
+    private void saveTask() {
+        String taskName = txtTask.getText().trim();
+        String date = dateField.getText().trim();
+        String category = (String) categoryBox.getSelectedItem();
+        String status = (String) statusBox.getSelectedItem();
+        String priority = (String) priorityBox.getSelectedItem();
+        String typeOrSubject = typeSubject.getText().trim();
+        Task newTask;
+        if ("Personal".equalsIgnoreCase(category)) {
+            newTask = new PersonalTask(taskName, category, status, priority, date, typeOrSubject);
+        }
+    }
+
+    private JPanel createTaskPanel(Task task) {
+        JPanel taskRow = new JPanel(new GridBagLayout());
+        taskRow.setBackground(Color.WHITE);
+
+        taskRow.setBorder(new EmptyBorder(2, 0, 2, 0));
+
+        JLabel taskLabel = new JLabel(task.toString());
+        JButton optionsButton = new JButton("...");
+        optionsButton.setPreferredSize(new Dimension(30, 20));
+
+        GridBagConstraints gbcLabel = new GridBagConstraints();
+        gbcLabel.gridx = 0;
+        gbcLabel.gridy = 0;
+        gbcLabel.weightx = 1.0;
+        gbcLabel.fill = GridBagConstraints.HORIZONTAL;
+        gbcLabel.anchor = GridBagConstraints.LINE_START;
+
+        GridBagConstraints gbcButton = new GridBagConstraints();
+        gbcButton.gridx = 1;
+        gbcButton.gridy = 0;
+        gbcButton.weightx = 0.0;
+        gbcButton.anchor = GridBagConstraints.EAST;
+        gbcButton.insets = new Insets(0, 5, 0, 0);
+
+        optionsButton.addActionListener(e -> showTaskDetails(task));
+
+        taskRow.add(taskLabel, gbcLabel);
+        taskRow.add(optionsButton, gbcButton);
+
+        return taskRow;
+
+    }
+
+    private void showTaskDetails(Task task) {
+        if (task == null) {
+            return;
+        }
+
+        JTextField taskNameField = new JTextField(task.getTask());
+        JComboBox<String> categoryBox = new JComboBox<>(new String[]{"Personal", "School"});
+        categoryBox.setSelectedItem(task.getCategory());
+        JComboBox<String> statusBox = new JComboBox<>(new String[]{"Not Started", "In Progress", "Done"});
+        statusBox.setSelectedItem(task.getStatus());
+        JComboBox<String> priorityBox = new JComboBox<>(new String[]{"Low", "Medium", "High"});
+        priorityBox.setSelectedItem(task.getPriority());
+        JTextField typeSubjectField = new JTextField();
+        JTextField dateField = new JTextField(task.getDate());
+
+        if (task instanceof PersonalTask) {
+            typeSubjectField.setText(((PersonalTask) task).getTypeOrSubject());
+        } else if (task instanceof SchoolTask) {
+            typeSubjectField.setText(((SchoolTask) task).getTypeOrSubject());
+        }
+
+        JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
+
+        panel.add(new JLabel("Task Name:"));
+        panel.add(taskNameField);
+
+        panel.add(new JLabel("Category:"));
+        panel.add(categoryBox);
+
+        panel.add(new JLabel("Status:"));
+        panel.add(statusBox);
+
+        panel.add(new JLabel("Priority:"));
+        panel.add(priorityBox);
+
+        panel.add(new JLabel("Type/Subject:"));
+        panel.add(typeSubjectField);
+
+        panel.add(new JLabel("Due Date:"));
+        panel.add(dateField);
+
+        int result = JOptionPane.showConfirmDialog(this, panel, "Edit Task", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String taskName = taskNameField.getText().trim();
+            if (taskName.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Task name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String category = (String) categoryBox.getSelectedItem();
+            String status = (String) statusBox.getSelectedItem();
+            String priority = (String) priorityBox.getSelectedItem();
+            String typeOrSubject = typeSubjectField.getText().trim();
+            String date = dateField.getText().trim();
+
+            // Remove old task and add updated one
+            register.getTaskManager().removeTask(task);
+
+            Task updatedTask;
+            if ("Personal".equalsIgnoreCase(category)) {
+                updatedTask = new PersonalTask(taskName, category, status, priority, date, typeOrSubject);
+            } else if ("School".equalsIgnoreCase(category)) {
+                updatedTask = new SchoolTask(taskName, category, status, priority, date, typeOrSubject);
+            } else {
+                updatedTask = new Task(taskName, category, status, priority, date);
+            }
+
+            register.getTaskManager().add(updatedTask);
+
+            // Refresh task list UI
+            refreshTaskList();
+        }
+
     }
 
     private void btnAllTaskActionPerformed(java.awt.event.ActionEvent evt) {                                           
