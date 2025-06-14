@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -16,17 +15,16 @@ import javax.swing.border.EmptyBorder;
 
 public class Home extends javax.swing.JFrame {
 
-    private int taskCounter = 0;
-    private Registration register;
-    private JPanel rowPanel;
-    private JTextField dateField, txtTask, typeSubject;
-    private JComboBox<String> categoryBox, statusBox, priorityBox;
+    private int total = 0, notStarted = 0, inProgress = 0, done = 0;
 
-    public Home(Registration register) {
+    private Registration user;
+
+    public Home(Registration user) {
         initComponents();
-        this.register = register;
+        this.user = user;
         taskPanel.setLayout(new BoxLayout(taskPanel, BoxLayout.Y_AXIS));
-        lblWelcomeName.setText(register.getUsername());
+        lblWelcomeName.setText(user.getUsername());
+        refreshTaskList();
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +36,7 @@ public class Home extends javax.swing.JFrame {
         lblWelcomeName = new javax.swing.JLabel();
         lblWelcomeBack = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
-        btnUser = new javax.swing.JButton();
+        btnAccount = new javax.swing.JButton();
         searchField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,9 +44,10 @@ public class Home extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        inprogress = new javax.swing.JLabel();
-        queue = new javax.swing.JLabel();
-        done = new javax.swing.JLabel();
+        lblTotalTask = new javax.swing.JLabel();
+        lblInProgress = new javax.swing.JLabel();
+        lblNotStarted = new javax.swing.JLabel();
+        lblDone = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -97,36 +96,33 @@ public class Home extends javax.swing.JFrame {
         lblWelcomeBack.setText("Welcome back,");
         getContentPane().add(lblWelcomeBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 190, -1));
 
+        btnSearch.setBackground(new java.awt.Color(140, 136, 136));
         btnSearch.setIcon(new javax.swing.ImageIcon("C:\\Users\\paula\\Documents\\TaskManagement\\search.png")); // NOI18N
-        btnSearch.setBorderPainted(false);
-        btnSearch.setContentAreaFilled(false);
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
+        btnSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        btnSearch.setFocusPainted(false);
+        btnSearch.setFocusable(false);
+        getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 40, 40));
 
-        btnUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\paula\\Documents\\TaskManagement\\user.png")); // NOI18N
-        btnUser.setBorder(null);
-        btnUser.setBorderPainted(false);
-        btnUser.setContentAreaFilled(false);
-        btnUser.addActionListener(new java.awt.event.ActionListener() {
+        btnAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\paula\\Documents\\TaskManagement\\user.png")); // NOI18N
+        btnAccount.setBorder(null);
+        btnAccount.setBorderPainted(false);
+        btnAccount.setContentAreaFilled(false);
+        btnAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUserActionPerformed(evt);
+                btnAccountActionPerformed(evt);
             }
         });
-        getContentPane().add(btnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 40, 50, -1));
+        getContentPane().add(btnAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 40, 50, -1));
 
         searchField.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
-        searchField.setText("          Type here to search...");
+        searchField.setText(" Type here to search...");
         searchField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        searchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFieldActionPerformed(evt);
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchFieldKeyPressed(evt);
             }
         });
-        getContentPane().add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 380, 40));
+        getContentPane().add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 310, 40));
 
         jLabel2.setFont(new java.awt.Font("Lucida Console", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,17 +146,22 @@ public class Home extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\paula\\Documents\\TaskManagement\\done.png")); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, -1, -1));
 
-        inprogress.setFont(new java.awt.Font("Lucida Console", 0, 18)); // NOI18N
-        inprogress.setText("0");
-        getContentPane().add(inprogress, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, -1, -1));
+        lblTotalTask.setFont(new java.awt.Font("Lucida Console", 0, 36)); // NOI18N
+        lblTotalTask.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalTask.setText("0");
+        getContentPane().add(lblTotalTask, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
 
-        queue.setFont(new java.awt.Font("Lucida Console", 0, 18)); // NOI18N
-        queue.setText("0");
-        getContentPane().add(queue, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 200, -1, -1));
+        lblInProgress.setFont(new java.awt.Font("Lucida Console", 0, 18)); // NOI18N
+        lblInProgress.setText("0");
+        getContentPane().add(lblInProgress, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, -1, -1));
 
-        done.setFont(new java.awt.Font("Lucida Console", 0, 18)); // NOI18N
-        done.setText("0");
-        getContentPane().add(done, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
+        lblNotStarted.setFont(new java.awt.Font("Lucida Console", 0, 18)); // NOI18N
+        lblNotStarted.setText("0");
+        getContentPane().add(lblNotStarted, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 200, -1, -1));
+
+        lblDone.setFont(new java.awt.Font("Lucida Console", 0, 18)); // NOI18N
+        lblDone.setText("0");
+        getContentPane().add(lblDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
         jLabel14.setText("Type/Subject");
@@ -192,11 +193,6 @@ public class Home extends javax.swing.JFrame {
         btnProjects.setBorder(null);
         btnProjects.setBorderPainted(false);
         btnProjects.setContentAreaFilled(false);
-        btnProjects.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProjectsActionPerformed(evt);
-            }
-        });
         getContentPane().add(btnProjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         btnCalendar.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
@@ -205,11 +201,6 @@ public class Home extends javax.swing.JFrame {
         btnCalendar.setBorder(null);
         btnCalendar.setBorderPainted(false);
         btnCalendar.setContentAreaFilled(false);
-        btnCalendar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalendarActionPerformed(evt);
-            }
-        });
         getContentPane().add(btnCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 90, -1));
 
         btnAllTask.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
@@ -218,11 +209,6 @@ public class Home extends javax.swing.JFrame {
         btnAllTask.setBorder(null);
         btnAllTask.setBorderPainted(false);
         btnAllTask.setContentAreaFilled(false);
-        btnAllTask.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAllTaskActionPerformed(evt);
-            }
-        });
         getContentPane().add(btnAllTask, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         btnAddTask.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
@@ -279,25 +265,17 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }                                           
-
-    private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-        AccountPage accPage = new AccountPage(register);
+        AccountPage accPage = new AccountPage(user);
         accPage.setVisible(true);
         accPage.setResizable(false);
         accPage.setLocationRelativeTo(null);
         this.dispose();
-    }                                       
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
+    }                                          
 
     private void btnAddTaskActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        taskCounter++;
+        total++;
 
         // Create components as local variables
         JTextField txtTask = new JTextField(15);
@@ -314,12 +292,13 @@ public class Home extends javax.swing.JFrame {
         JTextField dateField = new JTextField(7);
 
         // Create a new row panel for the task input
-        JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 5));
         rowPanel.setBackground(Color.white);
         rowPanel.setPreferredSize(new Dimension(taskPanel.getWidth(), 40));
-        rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40)); // prevent vertical stretching
+        rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+// prevent vertical stretching
 
-        // Add components with spacing
+        // Add components with spacing same as existing code
         rowPanel.add(Box.createHorizontalStrut(10));
         rowPanel.add(txtTask);
         rowPanel.add(Box.createHorizontalStrut(10));
@@ -333,7 +312,9 @@ public class Home extends javax.swing.JFrame {
         rowPanel.add(Box.createHorizontalStrut(10));
         rowPanel.add(dateField);
 
-        // Add to the panel at the bottom (append)
+        taskPanel.add(rowPanel);
+        taskPanel.add(Box.createVerticalStrut(5)); // 5px vertical space between rows
+
         taskPanel.add(rowPanel);
         taskPanel.revalidate();
         taskPanel.repaint();
@@ -360,12 +341,16 @@ public class Home extends javax.swing.JFrame {
                 newTask = new Task(taskName, category, status, priority, date);
             }
 
-            register.getTaskManager().add(newTask);
+            lblTotalTask.setText(Integer.toString(total));
+            updateStatusCount(status, 1);
+            user.getTaskManager().add(newTask);
 
+            // Remove the input row panel after adding task
+            taskPanel.remove(rowPanel);
+
+            // Add task panel row and refresh
             JPanel taskRow = createTaskPanel(newTask);
             taskPanel.add(taskRow);
-
-            taskPanel.remove(rowPanel);
 
             taskPanel.revalidate();
             taskPanel.repaint();
@@ -385,7 +370,7 @@ public class Home extends javax.swing.JFrame {
     private void refreshTaskList() {
         taskPanel.removeAll();
 
-        ArrayList<Task> tasks = register.getTaskManager().getTasks();
+        ArrayList<Task> tasks = user.getTaskManager().getTasks();
         for (Task task : tasks) {
             JPanel taskRow = createTaskPanel(task);
             taskPanel.add(taskRow);
@@ -396,97 +381,105 @@ public class Home extends javax.swing.JFrame {
 
     }
 
-    private void saveTask() {
-        String taskName = txtTask.getText().trim();
-        String date = dateField.getText().trim();
-        String category = (String) categoryBox.getSelectedItem();
-        String status = (String) statusBox.getSelectedItem();
-        String priority = (String) priorityBox.getSelectedItem();
-        String typeOrSubject = typeSubject.getText().trim();
-        Task newTask;
-        if ("Personal".equalsIgnoreCase(category)) {
-            newTask = new PersonalTask(taskName, category, status, priority, date, typeOrSubject);
-        }
-    }
-
     private JPanel createTaskPanel(Task task) {
-        JPanel taskRow = new JPanel(new GridBagLayout());
+        JPanel taskRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 8,5)); // Use FlowLayout
         taskRow.setBackground(Color.WHITE);
-
         taskRow.setBorder(new EmptyBorder(2, 0, 2, 0));
 
         JLabel taskLabel = new JLabel(task.toString());
         JButton optionsButton = new JButton("...");
         optionsButton.setPreferredSize(new Dimension(30, 20));
 
-        GridBagConstraints gbcLabel = new GridBagConstraints();
-        gbcLabel.gridx = 0;
-        gbcLabel.gridy = 0;
-        gbcLabel.weightx = 1.0;
-        gbcLabel.fill = GridBagConstraints.HORIZONTAL;
-        gbcLabel.anchor = GridBagConstraints.LINE_START;
+        // Show dialog for edit or remove
+        optionsButton.addActionListener(e -> {
+            String[] options = {"Edit", "Remove"};
+            int choice = JOptionPane.showOptionDialog(this, "What would you like to do?", "Task Options",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-        GridBagConstraints gbcButton = new GridBagConstraints();
-        gbcButton.gridx = 1;
-        gbcButton.gridy = 0;
-        gbcButton.weightx = 0.0;
-        gbcButton.anchor = GridBagConstraints.EAST;
-        gbcButton.insets = new Insets(0, 5, 0, 0);
+            if (choice == 0) {
+                editTask(task, taskRow);
+            } else if (choice == 1) {
+                int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this task?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    total--;
+                    lblTotalTask.setText(Integer.toString(total));
+                    updateStatusCount(task.getStatus(), -1);
 
-        optionsButton.addActionListener(e -> showTaskDetails(task));
+                    user.getTaskManager().removeTask(task);
+                    refreshTaskList(); // Refresh the task list after removal
+                }
+            }
+        });
 
-        taskRow.add(taskLabel, gbcLabel);
-        taskRow.add(optionsButton, gbcButton);
+        taskRow.add(taskLabel); // Add the task label
+        taskRow.add(optionsButton); // Add the options button
 
         return taskRow;
 
     }
 
-    private void showTaskDetails(Task task) {
-        if (task == null) {
+    private void editTask(Task task, JPanel taskRow) {
+
+        if (task == null || taskRow == null) {
             return;
         }
 
-        JTextField taskNameField = new JTextField(task.getTask());
+        // Create editable fields with current task data
+        JTextField txtTask = new JTextField(task.getTask(), 15);
         JComboBox<String> categoryBox = new JComboBox<>(new String[]{"Personal", "School"});
         categoryBox.setSelectedItem(task.getCategory());
         JComboBox<String> statusBox = new JComboBox<>(new String[]{"Not Started", "In Progress", "Done"});
         statusBox.setSelectedItem(task.getStatus());
         JComboBox<String> priorityBox = new JComboBox<>(new String[]{"Low", "Medium", "High"});
         priorityBox.setSelectedItem(task.getPriority());
-        JTextField typeSubjectField = new JTextField();
-        JTextField dateField = new JTextField(task.getDate());
+        JTextField typeSubject = new JTextField(10);
+        JTextField dateField = new JTextField(task.getDate(), 7);
 
         if (task instanceof PersonalTask) {
-            typeSubjectField.setText(((PersonalTask) task).getTypeOrSubject());
+            typeSubject.setText(((PersonalTask) task).getTypeOrSubject());
         } else if (task instanceof SchoolTask) {
-            typeSubjectField.setText(((SchoolTask) task).getTypeOrSubject());
+            typeSubject.setText(((SchoolTask) task).getTypeOrSubject());
         }
 
-        JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
+        // Create an edit panel with the same layout as add task row (FlowLayout left)
+        JPanel editPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,8,5));
+        editPanel.setBackground(Color.white);
+        editPanel.setPreferredSize(new Dimension(taskPanel.getWidth(), 40));
+        editPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 
-        panel.add(new JLabel("Task Name:"));
-        panel.add(taskNameField);
+        editPanel.add(Box.createHorizontalStrut(10));
+        editPanel.add(txtTask);
+        editPanel.add(Box.createHorizontalStrut(10));
+        editPanel.add(categoryBox);
+        editPanel.add(Box.createHorizontalStrut(10));
+        editPanel.add(statusBox);
+        editPanel.add(Box.createHorizontalStrut(10));
+        editPanel.add(priorityBox);
+        editPanel.add(Box.createHorizontalStrut(10));
+        editPanel.add(typeSubject);
+        editPanel.add(Box.createHorizontalStrut(10));
+        editPanel.add(dateField);
 
-        panel.add(new JLabel("Category:"));
-        panel.add(categoryBox);
+        // Find index of the taskRow in taskPanel
+        int index = -1;
+        for (int i = 0; i < taskPanel.getComponentCount(); i++) {
+            if (taskPanel.getComponent(i) == taskRow) {
+                index = i;
+                break;
+            }
+        }
 
-        panel.add(new JLabel("Status:"));
-        panel.add(statusBox);
+        if (index != -1) {
+            taskPanel.remove(index);
+            taskPanel.add(editPanel, index);
+            taskPanel.revalidate();
+            taskPanel.repaint();
+        }
 
-        panel.add(new JLabel("Priority:"));
-        panel.add(priorityBox);
+        final int finalIndex = index; // effectively final for use in lambda
 
-        panel.add(new JLabel("Type/Subject:"));
-        panel.add(typeSubjectField);
-
-        panel.add(new JLabel("Due Date:"));
-        panel.add(dateField);
-
-        int result = JOptionPane.showConfirmDialog(this, panel, "Edit Task", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        if (result == JOptionPane.OK_OPTION) {
-            String taskName = taskNameField.getText().trim();
+        Runnable saveChanges = () -> {
+            String taskName = txtTask.getText().trim();
             if (taskName.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Task name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -495,11 +488,10 @@ public class Home extends javax.swing.JFrame {
             String category = (String) categoryBox.getSelectedItem();
             String status = (String) statusBox.getSelectedItem();
             String priority = (String) priorityBox.getSelectedItem();
-            String typeOrSubject = typeSubjectField.getText().trim();
+            String typeOrSubject = typeSubject.getText().trim();
             String date = dateField.getText().trim();
 
-            // Remove old task and add updated one
-            register.getTaskManager().removeTask(task);
+            user.getTaskManager().removeTask(task);
 
             Task updatedTask;
             if ("Personal".equalsIgnoreCase(category)) {
@@ -510,25 +502,67 @@ public class Home extends javax.swing.JFrame {
                 updatedTask = new Task(taskName, category, status, priority, date);
             }
 
-            register.getTaskManager().add(updatedTask);
+            user.getTaskManager().add(updatedTask);
 
-            // Refresh task list UI
-            refreshTaskList();
-        }
+            taskPanel.remove(finalIndex);
+            taskPanel.add(createTaskPanel(updatedTask), finalIndex);
+            taskPanel.revalidate();
+            taskPanel.repaint();
+        };
 
+        dateField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    saveChanges.run();
+                }
+            }
+        });
     }
 
-    private void btnAllTaskActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
+    private void updateStatusCount(String status, int num) {
+        switch (status) {
+            case "Not Started":
+                notStarted += num;
+                lblNotStarted.setText(Integer.toString(notStarted));
+                break;
+            case "In Progress":
+                inProgress += num;
+                lblInProgress.setText(Integer.toString(inProgress));
+                break;
+            case "Done":
+                done += num;
+                lblDone.setText(Integer.toString(done));
+                break;
+        }
+    }
 
-    private void btnCalendarActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
 
-    private void btnProjectsActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void searchFieldKeyPressed(java.awt.event.KeyEvent evt) {                                       
         // TODO add your handling code here:
-    }                                           
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            searchTask();
+        }
+    }                                      
+
+    private void searchTask() {
+        String query = searchField.getText().trim().toLowerCase();
+        ArrayList<Task> tasks = user.getTaskManager().getTasks();
+        StringBuilder results = new StringBuilder();
+
+        for (Task task : tasks) {
+            if (task.getTask().toLowerCase().contains(query)) {
+                results.append(task.toString()).append("\n");
+            }
+        }
+
+        if (results.length() > 0) {
+            JOptionPane.showMessageDialog(this, results.toString(), "Search Results", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "No tasks found matching: " + query, "Search Results", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -557,22 +591,20 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Registration register = new Registration("email", "firstname", "lastname", "username", "password");
-                new Home(register).setVisible(true);
+                Registration user = new Registration("email", "firstname", "lastname", "username", "password");
+                new Home(user).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
     private javax.swing.JLabel bg;
+    private javax.swing.JButton btnAccount;
     private javax.swing.JButton btnAddTask;
     private javax.swing.JButton btnAllTask;
     private javax.swing.JButton btnCalendar;
     private javax.swing.JButton btnProjects;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnUser;
-    private javax.swing.JLabel done;
-    private javax.swing.JLabel inprogress;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -591,9 +623,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JLabel lblDone;
+    private javax.swing.JLabel lblInProgress;
+    private javax.swing.JLabel lblNotStarted;
+    private javax.swing.JLabel lblTotalTask;
     private javax.swing.JLabel lblWelcomeBack;
     private javax.swing.JLabel lblWelcomeName;
-    private javax.swing.JLabel queue;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextField searchField;
     private javax.swing.JPanel taskPanel;
