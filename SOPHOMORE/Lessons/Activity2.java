@@ -1,55 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
-package com.mycompany.main;
-
-/**
- *
- * @author NUD-Student
- */
 
 import java.util.Scanner;
 import java.util.Arrays;
 class Main {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         
-        System.out.print("Enter size: ");
-        int size = scan.nextInt();
-        scan.nextLine();
+        System.out.print("Enter storage size: ");
+        int limit = input.nextInt();
+        int[] arr = new int[limit];
         
-        int[] num = new int[size];
-        for(int i = 0; i < size; i++){
-            System.out.print("Enter a number: ");
-            num[i] = scan.nextInt();
+        //input
+        for(int i = 0; i < arr.length; i++){
+            System.out.print("Enter a value: ");
+            arr[i] = input.nextInt();
             
         }
         
-        System.out.print("\nOriginal Array: ");
-        for(int i = 0; i < size; i++){
-            System.out.print(num[i] + "\t");
-            
-        }
-        
-        int[] posArray = new int[size];
-        int[] negArray = new int[num.length];
+        //process
+        int[] posArray = new int[limit];
+        int[] negArray = new int[arr.length];
         int posCount = 0, negCount = 0;
-        for(int i = 0; i < num.length; i++){
-            if(num[i] > 0){
-                posArray[posCount] = num[i];
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] > 0){
+                posArray[posCount] = arr[i];
                 posCount++;
             } else {
-                negArray[negCount] = num[i];
+                negArray[negCount] = arr[i];
                 negCount++;
             }
         }
+        
+        //output
+        System.out.print("\nOriginal Array: ");
+        for(int i = 0; i < arr.length; i++){
+            System.out.print(arr[i] + "\t");
+            
+        }
+        
         System.out.print("\nPositive Element: ");
-        for(int i = 0; i < posCount; i++){
+        for(int i = 0; i < arr.length; i++){
             System.out.print(posArray[i] + "\t");
         }
+        
         System.out.print("\nNegative Element: ");
-        for(int i = 0; i < negCount; i++){
+        for(int i = 0; i < arr.length; i++){
             System.out.print(negArray[i] + "\t");
         }
     }
