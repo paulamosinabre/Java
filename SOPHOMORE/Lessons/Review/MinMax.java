@@ -1,8 +1,5 @@
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
 
 import java.util.Scanner;
-
 class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -14,26 +11,14 @@ class Main {
             System.out.print("Enter element: ");
             arr[i] = scan.nextInt();
         }
-        int max = 0, min = 0;
-      /*
-        for(int i = 0; i < arr.length; i++){
-            for(int j = 0; j < arr.length -1-i; j++){
-                if(arr[j] > arr[j + 1]){
-                    max = arr[j];
-                } 
-                
-                if(arr[j] < arr[j+1]){
-                    min = arr[j];
-                }
-            }
-        }
-        */
+        int max = arr[0], min = arr[0];
+      
       for(int i = 0; i < arr.length; i++){
-            if(arr[i] > arr[0]){
+            if(arr[i] > max){
                 max = arr[i];
             }
             
-            if(arr[i] < arr[0]){
+            if(arr[i] < min){
                 min = arr[i];
             }
         }
