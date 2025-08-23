@@ -1,0 +1,219 @@
+// example number 1. Starting from 2 to 40. Display them in increasing manner. Even numbers only
+class HelloWorld {
+    public static void main(String[] args) {
+        
+        int num = 1;
+        while (num <= 40) {
+            if(num % 2 == 0)
+            System.out.println(num);
+            num++;
+        
+        }
+    }
+}
+
+// example #2. output = 41 to 7 odd number only descending order
+class HelloWorld {
+    public static void main(String[] args) {
+        
+       int odd = 41;
+       
+       while (odd >= 7) {
+           if (odd % 2 == 1)
+                System.out.println(odd);
+            odd--;
+       }
+    }
+}
+
+// example #3. descending order
+class HelloWorld {
+    public static void main(String[] args) {
+        
+       int i = 20;
+       while (i <= 35) {
+           if (i % 2 == 1)
+           System.out.print(i + " ");
+           i++;
+       }
+    }
+}
+
+// EXAMPLE 4. ALLOWS THE USER TO INPUT A LOT OF TIMES UNTIL IT IS GREATER THAN 100
+
+import java.util.Scanner;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner myNum = new Scanner(System.in);
+        
+        int sum = 0;
+        while (true) {
+            System.out.println("Enter a number");
+            sum += myNum.nextInt();
+            
+            if (sum > 100 )
+                break;
+        }
+        System.out.println("Done \t Sum:" + sum);
+        
+    }
+}
+
+// OTHER POSSIBLE CODDE
+
+import java.util.Scanner;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner myNum = new Scanner(System.in);
+        
+      int sum = 0;
+      
+      while (sum <= 100) {
+          System.out.println("Enter a number");
+          sum += myNum.nextInt();
+          
+      }
+        System.out.println("Done \t" + sum);
+    }
+}
+
+// Possible
+import java.util.Scanner;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner myNum = new Scanner(System.in);
+        
+      int sum = 0;
+      
+      do {
+        System.out.println("Enter a number");
+        sum += myNum.nextInt();
+      } while (sum <= 100);
+          
+        System.out.println("Done \t" + sum);
+    }
+}
+
+//MAGSSTOP KAPAG NAKAABOT NG 120
+import java.util.Scanner;
+
+public class OnlyPositives {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int sum = 0;
+        while(true){
+            System.out.print("Give a number: ");
+            int num = Integer.valueOf(scanner.nextLine());
+            sum += num;
+            
+            if (sum >= 120) {
+                System.out.println("The sum is: " + sum);
+                break;
+            }
+        }
+    }
+}
+
+// will print 1 + 2= 3 +2 =5 and so on
+class HelloWorld {
+    public static void main(String[] args) {
+        int x = 1;
+        while(x <= 50){
+            System.out.println("x is " + x);
+            x += 2;
+        }
+    }
+}
+
+// how many times the user can execute
+import java.util.Scanner;
+
+public class WhileActivity {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+        int num;
+        int sum = 0;
+        int count = 0;
+    
+        System.out.println("How many times?: ");
+        int times = Integer.valueOf(scan.nextLine());
+        
+    while (count < times){
+        System.out.println("Enter an integer: ");
+        num = Integer.valueOf(scan.nextLine());
+        sum += num;
+        count += 1;
+    }
+        System.out.println("Sum is " + sum);
+        //System.out.println("");
+    }
+}
+
+// will break sa 0
+import java.util.Scanner;
+
+public class WhileActivity {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+        int num = 0;
+        int sum = 0;
+        int count = 0;
+    
+        /*
+        System.out.println("How many times?: ");
+        int times = Integer.valueOf(scan.nextLine()); */
+        
+    while (count <= num){
+        System.out.println("Enter an integer: ");
+        num = Integer.valueOf(scan.nextLine());
+        sum += num;
+        count += 1;
+        
+        if (num == 0){
+            break;
+        } 
+    }
+        System.out.println("Sum is " + sum);
+        //System.out.println("");
+    }
+}
+// do-while
+// enter your age
+import java.util.Scanner;
+public class DoWhileLesson {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner scan = new Scanner(System.in);
+        
+        char repeat;
+        do {
+            System.out.println("\nEnter your birth year: ");
+            int year = Integer.valueOf(scan.nextLine());
+            
+            int age = 2024 - year;
+            System.out.println("Your age is " + age);
+            
+            System.out.println("Do you want to continue? [Press 'Y' to proceed]: ");
+            String input = scan.nextLine();
+            repeat = input.charAt(0);
+        } while(repeat == 'Y' || repeat == 'y');
+    
+        
+    }
+    
+}
+

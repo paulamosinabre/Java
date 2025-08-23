@@ -1,9 +1,0 @@
-  System.out.println("Enter a number: ");
-    double number = type.nextDouble();
-    System.out.println("Enter the dollar rate: ");
-    double dollar = type.nextDouble();
-    System.out.println("Dollar to peso: " + dollar * number + "pesos");
-    System.out.println("inches to cm: " + 2.54 * number + "cm"); 
-    double x1 = number - 32;
-    double y1 = x1 * 5/9;
-    System.out.printf("fahrenheit to celsius: " + "%.3f", y1);

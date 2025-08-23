@@ -1,4 +1,0 @@
-  int x = 5;
-  System.out.println(x /=5);   
-
-// the output will be "1" since x is 5, 5 divide 5 is 1

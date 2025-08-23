@@ -1,0 +1,50 @@
+import java.util.Scanner;
+public class Lab1_CCPRGG1L {
+/**
+* @param args the command line arguments
+*/
+public static void main(String[] args) {
+Scanner type = new Scanner(System.in);
+
+System.out.println("Enter the first number: ");
+int num1 = type.nextInt();
+
+System.out.println("Enter the second number: ");
+int num2 = type.nextInt();
+
+System.out.println("Select an operator (+, -, *, /): ");
+char operator = type.next().charAt(0);
+
+int sum = num1 + num2;
+int difference = num1 - num2;
+int product = num1 * num2;
+int quotient = 0;
+
+switch (operator) {
+        case '+':
+            System.out.println(num1 + " + " + num2 + " = " + sum);
+            break;
+            
+        case '-':
+            System.out.println(num1 + " - " + num2 + " = " + difference);
+            break;
+            
+        case '*':
+            System.out.println(num1 + " * " + num2 + " = " + product);
+            break;
+            
+        case '/':
+            if (num2 == 0) {
+                System.out.println("Invalid value. Division by zero is not allowed");
+            } else {
+                quotient = num1 / num2;
+                System.out.println(num1 + " / " + num2 + " = " + quotient);
+            }
+            break; 
+            
+        default:
+            System.out.println("Invalid Operator!");
+            break; 
+    }
+}
+}

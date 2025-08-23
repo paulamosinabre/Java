@@ -1,0 +1,38 @@
+
+public class Registration {
+    private String firstName, lastName, email, pass, phoneNumber, address;
+
+        public Registration(String firstName, String lastName, String email, String password, String phoneNumber, String address) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.pass = password;
+            this.phoneNumber = phoneNumber;
+            this.address = address;
+    }
+
+      public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return pass;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+    
+}
