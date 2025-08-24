@@ -1,7 +1,3 @@
-# JAVA
-REAL DATE:
-JAVA FINAL PROJECT - COMMITED ON OCT 28 <br>
-LAB ACTIVITES - COMMITED ON SEP 7 <br>
-PRACTICE - COMMITED ON SEP 13 AND 19 <br>
-LESSONS - COMMITED ON SEP 7 TIL OCT 18 <br>
-TAKE HOME ACT - COMMITED ON SEP 7
+# Java
+###### About
+This repository is specifically used for storing activities, lessons, projects, and personal coding practices that we conducted on National University.  
