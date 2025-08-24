@@ -1,5 +1,5 @@
 
-class Main {
+class M ain {
     public static void main(String[] args) {
         
         int i = 13;
